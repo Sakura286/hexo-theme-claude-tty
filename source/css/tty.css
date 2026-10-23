@@ -52,7 +52,7 @@
     "Noto Sans CJK SC", "Microsoft YaHei", monospace;
 
   --gutter: 2rem;
-  --measure: 36.5rem;
+  --measure: 42rem;
   --h1: clamp(1.5rem, 1.1rem + 1vw, 2rem);
 
   color-scheme: dark;
@@ -458,17 +458,20 @@ img, svg { max-width: 100%; }
 }
 .prose a:hover { color: var(--accent); text-decoration-color: currentColor; }
 
-.prose :is(h1, h2, h3, h4, h5, h6) { position: relative; color: var(--ink); scroll-margin-top: 1.5rem; }
-
-.prose h1, .prose h2 {
-  margin: 2.8em 0 1.1em;
-  font: 500 .875rem/1.55 var(--mono);
-  letter-spacing: .02em;
-  text-transform: uppercase;
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  position: relative;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 500;
+  scroll-margin-top: 1.5rem;
 }
-.prose h1 { font-size: .95rem; padding-bottom: .5em; border-bottom: 1px solid var(--line-soft); }
-.prose h3 { margin: 2.2em 0 .8em; font: 500 1.1rem/1.4 var(--sans); }
-.prose :is(h4, h5, h6) { margin: 1.8em 0 .6em; font: 500 1rem/1.5 var(--sans); }
+
+/* claude.dev 的二级标题是小号等宽大写，对中文会显得比三级标题还小，这里改成逐级递减 */
+.prose h1 { margin: 3rem 0 1.1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line-soft); font-size: 1.45rem; line-height: 1.35; }
+.prose h2 { margin: 2.6rem 0 1rem; font-size: 1.25rem; line-height: 1.4; }
+.prose h3 { margin: 2.1rem 0 .8rem; font-size: 1.08rem; line-height: 1.45; }
+.prose :is(h4, h5, h6) { margin: 1.7rem 0 .6rem; font-size: 1rem; line-height: 1.5; }
+.prose :is(h5, h6) { color: var(--ink-2); }
 
 .prose .headerlink {
   position: absolute;

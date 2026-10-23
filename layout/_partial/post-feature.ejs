@@ -1,6 +1,6 @@
 <% const firstTag = post.tags.toArray()[0]; %>
 <a class="feature" href="<%- url_for(post.path) %>">
-  <span class="feature-icon"><%- pixel_icon(post.slug, 'tile') %></span>
+  <span class="feature-icon"><%- post_icon(post, 'tile') %></span>
   <span class="feature-body">
     <span class="badges">
       <span class="badge badge-solid"><%= __('list.latest') %></span>

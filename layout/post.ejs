@@ -10,7 +10,7 @@
   <header class="wrap split post-head">
     <div></div>
     <div>
-      <div class="post-icon"><%- pixel_icon(page.slug || page.path, 'tile') %></div>
+      <div class="post-icon"><%- post_icon(page, 'tile') %></div>
       <h1 class="post-title"><%= page.title %></h1>
       <% if (page.description) { %><p class="post-sub"><%= page.description %></p><% } %>
       <dl class="meta">

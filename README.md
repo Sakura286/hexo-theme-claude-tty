@@ -6,7 +6,7 @@
 
 - 页面：首页（第一篇用大卡片，标签筛选栏）、文章、归档（年 / 月）、单个标签、标签总览、404。标签总览和 404 由主题生成，不需要在 `source/` 里建页面。
 - 文章：树形目录、阅读进度、阅读时长、标题锚点、代码块（语言标签、复制按钮、行号）、脚注、图片点击放大。
-- 每篇文章有一个由 slug 算出来的对称像素图标，不需要在 front matter 里配置。
+- 每篇文章有一个像素图标，按标签或目录自动选，也可以在 front matter 里指定，见下文。
 - 站内搜索：生成 `search.json`，按 `S` 或 `/` 打开。
 - 深浅色：默认跟随系统，可手动切换并记住选择。
 - 快捷键：`H` 首页、`A` 归档、`T` 标签、`S` 搜索。
@@ -32,6 +32,34 @@ highlight:
   hljs: true
 ```
 
+## 文章图标
+
+文章页、首页大卡片和列表里的像素图标按以下顺序选：
+
+1. front matter 里的 `icon: 图标名`；
+2. `post_icon.map` 里从上往下第一个命中的项，键是标签名或 `source/_posts/` 下的子目录名，不区分大小写；
+3. `post_icon.default`，默认是 `doc`。
+
+内置图标：`doc` `box` `term` `moto` `shapes` `question` `gear` `chip`。写 `identicon` 则按 slug 生成随机的对称点阵。
+
+```yaml
+# _config.tty.yml
+post_icon:
+  map:
+    motor: moto
+    debian: box
+    linux: term
+  custom:            # 自己画的图标，'#' 为实心，最大 14x14，会自动居中
+    heart:
+      - '.##.##.'
+      - '#######'
+      - '.#####.'
+      - '..###..'
+      - '...#...'
+```
+
+内置图标的点阵在 `scripts/icons.js`。
+
 ## 脚注
 
 `hexo-renderer-marked` 不支持脚注，主题在 Markdown 渲染前处理：
@@ -51,7 +79,8 @@ highlight:
 layout/          EJS 模板；_partial/ 是公共片段
 languages/       zh-cn.yml、en.yml、default.yml，文件名必须和站点 language 完全一致
 scripts/
-  helpers.js     像素图标、阅读时长、构建时间等 helper
+  helpers.js     文章图标、阅读时长、构建时间等 helper
+  icons.js       内置图标的点阵
   footnote.js    脚注（before_post_render）
   generators.js  search.json、标签总览页、404 页
 source/

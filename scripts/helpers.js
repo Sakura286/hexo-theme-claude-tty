@@ -2,15 +2,17 @@
 'use strict';
 
 const crypto = require('crypto');
+const builtinIcons = require('./icons');
 
 const CJK = /[㐀-鿿豈-﫿]/g;
+const ICON_SIZE = 14;
 
-// 把点阵（'#' 为实心）转成一条 SVG path，每个像素一个 1x1 方块
-function bitmapPath(rows) {
+// 把点阵（'#' 为实心）转成一条 SVG path，同一行连续的像素合成一个矩形
+function bitmapPath(rows, ox = 0, oy = 0) {
   let d = '';
   rows.forEach((row, y) => {
-    for (let x = 0; x < row.length; x++) {
-      if (row[x] === '#') d += `M${x} ${y}h1v1h-1z`;
+    for (const run of row.matchAll(/#+/g)) {
+      d += `M${run.index + ox} ${y + oy}h${run[0].length}v1h-${run[0].length}z`;
     }
   });
   return d;
@@ -33,14 +35,34 @@ function identicon(seed) {
   return rows;
 }
 
-// variant: 'tile' 是陶土色底块加深色图案，'line' 只有 currentColor 图案
-hexo.extend.helper.register('pixel_icon', (seed, variant = 'line') => {
-  const d = bitmapPath(identicon(seed));
-  if (variant === 'tile') {
-    return '<svg class="px px-tile" viewBox="-2 -2 13 13" shape-rendering="crispEdges" aria-hidden="true">'
-      + `<rect x="-2" y="-2" width="13" height="13"/><path d="${d}"/></svg>`;
+// 选图标：front matter 的 icon > post_icon.map 里第一个命中标签或 _posts 子目录的项 > post_icon.default。
+// 图标名写 identicon 时，用 slug 的哈希生成对称点阵。
+function iconName(post, conf) {
+  if (post.icon) return String(post.icon);
+  const names = new Set();
+  if (post.tags) post.tags.forEach(tag => names.add(tag.name.toLowerCase()));
+  const dir = (post.source || '').replace(/^_posts\//, '').split('/');
+  if (dir.length > 1) names.add(dir[0].toLowerCase());
+  for (const [key, icon] of Object.entries(conf.map || {})) {
+    if (names.has(key.toLowerCase())) return icon;
   }
-  return '<svg class="px px-line" viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true">'
+  return conf.default || 'doc';
+}
+
+// variant: 'tile' 是陶土色底块加深色图案，'line' 只有 currentColor 图案
+hexo.extend.helper.register('post_icon', function (post, variant = 'line') {
+  const conf = this.theme.post_icon || {};
+  const name = iconName(post, conf);
+  const rows = name === 'identicon'
+    ? identicon(post.slug || post.path)
+    : (conf.custom && conf.custom[name]) || builtinIcons[name] || builtinIcons.doc;
+  const width = Math.max(...rows.map(r => r.length));
+  const d = bitmapPath(rows, Math.floor((ICON_SIZE - width) / 2), Math.floor((ICON_SIZE - rows.length) / 2));
+  if (variant === 'tile') {
+    return `<svg class="px px-tile" viewBox="-3 -3 ${ICON_SIZE + 6} ${ICON_SIZE + 6}" shape-rendering="crispEdges" aria-hidden="true">`
+      + `<rect x="-3" y="-3" width="${ICON_SIZE + 6}" height="${ICON_SIZE + 6}"/><path d="${d}"/></svg>`;
+  }
+  return `<svg class="px px-line" viewBox="0 0 ${ICON_SIZE} ${ICON_SIZE}" shape-rendering="crispEdges" aria-hidden="true">`
     + `<path d="${d}"/></svg>`;
 });
 

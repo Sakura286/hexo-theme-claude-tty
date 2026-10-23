@@ -230,9 +230,11 @@
 
   function onScroll() {
     if (prose && bar) {
-      var rect = prose.getBoundingClientRect();
-      var total = rect.height - window.innerHeight * 0.6;
-      var p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : (rect.top < 0 ? 1 : 0);
+      // 正文底部进入视口底部算读完；正文后面的内容不够长、滚不到那里时，以页面滚到底为准
+      var scrolled = window.scrollY;
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      var end = Math.min(prose.getBoundingClientRect().bottom + scrolled - window.innerHeight, maxScroll);
+      var p = end > 0 ? Math.min(1, Math.max(0, scrolled / end)) : 1;
       bar.style.setProperty('--p', p.toFixed(4));
       pct.textContent = String(Math.round(p * 100)).padStart(2, '0') + '%';
     }

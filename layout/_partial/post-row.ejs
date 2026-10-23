@@ -1,5 +1,5 @@
 <a class="row" href="<%- url_for(post.path) %>">
-  <span class="row-icon"><%- pixel_icon(post.slug, 'line') %></span>
+  <span class="row-icon"><%- post_icon(post, 'line') %></span>
   <time class="row-date" datetime="<%= post.date.toISOString() %>"><%= date(post.date, config.date_format) %></time>
   <span class="row-title"><%= post.title %></span>
   <span class="row-meta"><%= reading_minutes(post.content) %> <%= __('list.minutes') %></span>

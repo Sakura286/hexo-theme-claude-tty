@@ -32,6 +32,17 @@ post:
   cjk_per_minute: 400
   words_per_minute: 200
 
+# 文章图标。选择顺序：
+#   1. 文章 front matter 里的 icon: 图标名
+#   2. map 里从上往下第一个命中的项，键是标签名或 source/_posts/ 下的子目录名（不区分大小写）
+#   3. default
+# 内置图标：doc box term moto shapes question gear chip；写 identicon 则按 slug 生成随机对称点阵。
+# custom 里可以加自己的图标或覆盖内置图标：名字 -> 点阵行（'#' 为实心，最大 14x14）。
+post_icon:
+  default: doc
+  map: {}
+  custom: {}
+
 # 脚注：正文 [^1]，定义 [^1]: 内容
 footnote: true
 
