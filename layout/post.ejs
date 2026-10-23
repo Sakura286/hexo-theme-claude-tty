@@ -1,0 +1,67 @@
+<%
+  const conf = theme.post || {};
+  const minutes = reading_minutes(page.content);
+  const tree = conf.toc ? toc(page.content, { list_number: false, max_depth: conf.toc_depth || 3 }) : '';
+  const tags = page.tags ? page.tags.toArray() : [];
+  const showUpdated = conf.updated && page.updated && page.date && !page.updated.isSame(page.date, 'day');
+  const vc = theme.vercount || {};
+%>
+<article class="post">
+  <header class="wrap split post-head">
+    <div></div>
+    <div>
+      <div class="post-icon"><%- pixel_icon(page.slug || page.path, 'tile') %></div>
+      <h1 class="post-title"><%= page.title %></h1>
+      <% if (page.description) { %><p class="post-sub"><%= page.description %></p><% } %>
+      <dl class="meta">
+        <div><dt><%= __('post.author') %></dt><dd class="tl"><%= page.author || config.author %></dd></div>
+        <% if (tags.length) { %>
+        <div><dt><%= __('post.tags') %></dt><dd class="tl"><span><% tags.forEach(function (tag, i) { %><% if (i) { %>, <% } %><a href="<%- url_for(tag.path) %>"><%= tag.name %></a><% }) %></span></dd></div>
+        <% } %>
+        <div><dt><%= __('post.published') %></dt><dd class="tl"><time datetime="<%= page.date.toISOString() %>"><%= date(page.date, config.date_format) %></time></dd></div>
+        <% if (showUpdated) { %>
+        <div><dt><%= __('post.updated') %></dt><dd class="tl"><time datetime="<%= page.updated.toISOString() %>"><%= date(page.updated, config.date_format) %></time></dd></div>
+        <% } %>
+        <% if (vc.enable && vc.page_pv) { %>
+        <div><dt><%= __('post.views') %></dt><dd class="tl" id="vercount_value_page_pv">-</dd></div>
+        <% } %>
+      </dl>
+    </div>
+  </header>
+  <div class="rule"></div>
+  <div class="wrap split post-main">
+    <aside class="post-aside">
+      <div class="aside-in">
+        <p class="aside-title" hidden><%= page.title %></p>
+        <% if (tree) { %>
+        <details class="tree" open>
+          <summary class="label"><%= __('post.toc') %></summary>
+          <%- tree %>
+        </details>
+        <% } %>
+        <div class="progress" aria-hidden="true"><span class="bar"><i></i></span><span class="pct">00%</span></div>
+        <p class="label"><%= minutes %> <%= __('post.min_read') %></p>
+        <div class="share">
+          <p class="label"><%= __('post.share') %></p>
+          <ul class="tree-list">
+            <li><button type="button" class="js-copy-link" data-done="<%= __('post.copied') %>"><%= __('post.copy_link') %></button></li>
+            <li><a href="#top"><%= __('post.back_top') %></a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div class="post-body">
+      <div class="prose"><%- page.content %></div>
+      <% if (page.prev || page.next) { %>
+      <nav class="post-nav">
+        <% if (page.prev) { %>
+        <a href="<%- url_for(page.prev.path) %>" rel="prev"><span class="label">← <%= __('post.newer') %></span><span><%= page.prev.title %></span></a>
+        <% } else { %><span></span><% } %>
+        <% if (page.next) { %>
+        <a href="<%- url_for(page.next.path) %>" rel="next" class="post-nav-next"><span class="label"><%= __('post.older') %> →</span><span><%= page.next.title %></span></a>
+        <% } %>
+      </nav>
+      <% } %>
+    </div>
+  </div>
+</article>

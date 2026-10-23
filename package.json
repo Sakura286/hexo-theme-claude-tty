@@ -1,0 +1,16 @@
+{
+  "name": "hexo-theme-tty",
+  "version": "0.1.0",
+  "description": "A warm terminal-style Hexo theme",
+  "keywords": [
+    "hexo",
+    "theme"
+  ],
+  "author": "Sakura286",
+  "license": "MIT",
+  "repository": "github:Sakura286/hexo-theme-tty",
+  "peerDependencies": {
+    "hexo": ">=7.0.0",
+    "hexo-renderer-ejs": ">=2.0.0"
+  }
+}

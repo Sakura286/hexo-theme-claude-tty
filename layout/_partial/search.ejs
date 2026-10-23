@@ -1,0 +1,11 @@
+<dialog class="search" id="search" aria-label="<%= __('nav.search') %>"
+  data-src="<%- url_for(theme.search.path || 'search.json') %>"
+  data-loading="<%= __('search.loading') %>" data-empty="<%= __('search.empty') %>" data-failed="<%= __('search.failed') %>">
+  <div class="search-input">
+    <span class="prompt" aria-hidden="true">&gt;</span>
+    <input type="search" placeholder="<%= __('search.placeholder') %>" autocomplete="off" spellcheck="false" aria-label="<%= __('search.placeholder') %>">
+    <kbd>Esc</kbd>
+  </div>
+  <ol class="search-results" role="listbox"></ol>
+  <p class="search-foot"><%= __('search.hint') %></p>
+</dialog>

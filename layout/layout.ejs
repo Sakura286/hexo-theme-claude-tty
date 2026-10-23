@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="<%= [].concat(config.language)[0] || 'en' %>" data-scheme-default="<%= theme.color_scheme || 'auto' %>"<% if (theme.image_zoom) { %> data-zoom<% } %>>
+<head>
+<%- partial('_partial/head') %>
+</head>
+<body data-copy="<%= __('code.copy') %>" data-copied="<%= __('code.copied') %>">
+<a class="skip" href="#main"><%= __('nav.skip') %></a>
+<%- partial('_partial/topbar') %>
+<main id="main"><%- body %></main>
+<%- partial('_partial/footer') %>
+<% if (theme.search && theme.search.enable) { %><%- partial('_partial/search') %><% } %>
+<script src="<%- url_for('/js/tty.js') %>" defer></script>
+<% if (theme.vercount && theme.vercount.enable) { %><script src="https://vercount.one/js" defer></script><% } %>
+</body>
+</html>

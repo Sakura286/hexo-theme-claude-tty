@@ -1,0 +1,48 @@
+nav:
+  home: 首页
+  archives: 归档
+  tags: 标签
+  search: 搜索
+  scheme: 切换深浅色
+  skip: 跳到正文
+list:
+  all: 全部
+  latest: 最新
+  newer: 较新
+  older: 较早
+  posts: 篇文章
+  tags: 个标签
+  minutes: 分钟
+post:
+  author: 作者
+  tags: 标签
+  published: 发布于
+  updated: 更新于
+  views: 阅读
+  toc: 目录
+  min_read: 分钟阅读
+  share: 分享
+  copy_link: 复制链接
+  copied: 已复制
+  back_top: 回到顶部
+  newer: 较新
+  older: 较早
+  footnotes: 脚注
+  footnote_back: 回到正文
+code:
+  copy: 复制
+  copied: 已复制
+search:
+  placeholder: 搜索文章
+  loading: 加载中…
+  empty: 没有找到
+  failed: 索引加载失败
+  hint: ↑↓ 选择 · Enter 打开 · Esc 关闭
+footer:
+  site_pv: 访问
+  site_uv: 访客
+  built: 构建于
+  top: 顶部
+not_found:
+  title: 页面不存在
+  back: 回到首页

@@ -1,0 +1,53 @@
+# hexo-theme-tty 默认配置。
+# 站点里的 _config.tty.yml 会覆盖这里的同名项。
+
+# 顶部导航。name 对应语言文件里的 nav.<name>，也可以用 title 直接写文字；
+# key 是键盘快捷键（单个字母），留空则不绑定。
+menu:
+  - { name: home, path: /, key: h }
+  - { name: archives, path: /archives/, key: a }
+  - { name: tags, path: /tags/, key: t }
+
+# 首页左栏标题下的一句话，留空则用站点的 subtitle
+tagline:
+
+favicon: /favicon.svg
+rss: /atom.xml
+
+# 默认配色：auto 跟随系统，dark / light 固定。访客手动切换后以访客的选择为准。
+color_scheme: auto
+
+home:
+  # 首页第一篇文章是否用大卡片展示
+  feature_latest: true
+  # 筛选栏最多显示几个标签（按文章数排序）
+  tag_tabs: 6
+
+post:
+  toc: true
+  toc_depth: 3
+  # 显示「更新于」。需要站点 updated_option 不是 'empty'，模板里会判空
+  updated: false
+  # 阅读时长：中文每分钟字数、英文每分钟词数
+  cjk_per_minute: 400
+  words_per_minute: 200
+
+# 脚注：正文 [^1]，定义 [^1]: 内容
+footnote: true
+
+search:
+  enable: true
+  path: search.json
+
+# 点击文章图片放大
+image_zoom: true
+
+# https://vercount.one
+vercount:
+  enable: false
+  page_pv: true
+  site_pv: true
+  site_uv: true
+
+# 页脚显示构建时间（UTC）
+build_time: false

@@ -1,0 +1,18 @@
+<% const feature = theme.home && theme.home.feature_latest && page.current === 1; %>
+<div class="wrap split">
+  <aside class="intro">
+    <h1 class="intro-title"><%= config.title %><span class="cursor" aria-hidden="true"></span></h1>
+    <p class="intro-text"><%= theme.tagline || config.subtitle %></p>
+  </aside>
+  <section class="feed">
+    <%- partial('_partial/tabs', { active: '' }) %>
+    <% page.posts.each(function (post, i) { %>
+      <% if (feature && i === 0) { %>
+        <%- partial('_partial/post-feature', { post: post }) %>
+      <% } else { %>
+        <%- partial('_partial/post-row', { post: post }) %>
+      <% } %>
+    <% }) %>
+    <%- partial('_partial/pager') %>
+  </section>
+</div>

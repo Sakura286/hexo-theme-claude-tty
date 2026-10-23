@@ -1,0 +1,9 @@
+<div class="wrap split">
+  <div></div>
+  <section class="term" aria-label="<%= __('not_found.title') %>">
+    <p><span class="prompt">$</span> cd <span class="js-path">/404</span></p>
+    <p class="term-err">cd: <span class="js-path">/404</span>: No such file or directory</p>
+    <p class="term-note"># <%= __('not_found.title') %></p>
+    <p><span class="prompt">$</span> <a href="<%- url_for('/') %>">cd ~</a> <span class="term-note"># <%= __('not_found.back') %></span><span class="cursor" aria-hidden="true"></span></p>
+  </section>
+</div>

@@ -1,0 +1,20 @@
+<%
+  const first = site.posts.sort('date').first();
+  const thisYear = new Date().getFullYear();
+  const since = first ? first.date.year() : thisYear;
+  const vc = theme.vercount || {};
+%>
+<footer class="footer">
+  <div class="wrap footer-in">
+    <p class="footer-l">
+      <span>© <%= since === thisYear ? thisYear : since + '–' + thisYear %> <%= config.author %></span>
+      <span>Hexo · tty</span>
+    </p>
+    <p class="footer-r">
+      <% if (vc.enable && vc.site_pv) { %><span><%= __('footer.site_pv') %> <span id="vercount_value_site_pv">-</span></span><% } %>
+      <% if (vc.enable && vc.site_uv) { %><span><%= __('footer.site_uv') %> <span id="vercount_value_site_uv">-</span></span><% } %>
+      <% if (theme.build_time) { %><span><%= __('footer.built') %> <%= build_time() %></span><% } %>
+      <a href="#top"><%= __('footer.top') %> ↑</a>
+    </p>
+  </div>
+</footer>

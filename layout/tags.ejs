@@ -1,0 +1,14 @@
+<% const tags = site.tags.toArray().sort((a, b) => b.length - a.length || a.name.localeCompare(b.name)); %>
+<div class="wrap split">
+  <aside class="intro">
+    <h1 class="intro-title"><%= __('nav.tags') %></h1>
+    <p class="intro-text"><%= tags.length %> <%= __('list.tags') %></p>
+  </aside>
+  <section class="feed">
+    <ul class="leaders">
+      <% tags.forEach(function (tag) { %>
+      <li><a href="<%- url_for(tag.path) %>"><span class="leaders-name">#<%= tag.name %></span><span class="leaders-dots"></span><span class="leaders-n"><%= tag.length %></span></a></li>
+      <% }) %>
+    </ul>
+  </section>
+</div>

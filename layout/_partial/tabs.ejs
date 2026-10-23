@@ -1,0 +1,20 @@
+<%
+  const sorted = site.tags.toArray().sort((a, b) => b.length - a.length || a.name.localeCompare(b.name));
+  const shown = sorted.slice(0, (theme.home && theme.home.tag_tabs) || 6);
+  if (active && !shown.some(t => t.name === active)) {
+    const extra = sorted.find(t => t.name === active);
+    if (extra) shown.push(extra);
+  }
+%>
+<div class="tabs">
+  <nav class="tabs-list">
+    <a href="<%- url_for('/') %>"<% if (!active) { %> class="on"<% } %>><%= __('list.all') %></a>
+    <% shown.forEach(function (tag) { %>
+    <a href="<%- url_for(tag.path) %>"<% if (active === tag.name) { %> class="on"<% } %>><%= tag.name %></a>
+    <% }) %>
+    <% if (sorted.length > shown.length) { %><a href="<%- url_for('/tags/') %>" aria-label="<%= __('nav.tags') %>">···</a><% } %>
+  </nav>
+  <% if (theme.search && theme.search.enable) { %>
+  <button type="button" class="js-search tabs-search"><kbd>[S]</kbd> <%= __('nav.search') %></button>
+  <% } %>
+</div>

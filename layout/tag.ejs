@@ -1,0 +1,14 @@
+<% const tag = site.tags.findOne({ name: page.tag }); %>
+<div class="wrap split">
+  <aside class="intro">
+    <h1 class="intro-title">#<%= page.tag %></h1>
+    <p class="intro-text"><%= tag ? tag.length : page.posts.length %> <%= __('list.posts') %></p>
+  </aside>
+  <section class="feed">
+    <%- partial('_partial/tabs', { active: page.tag }) %>
+    <% page.posts.each(function (post) { %>
+      <%- partial('_partial/post-row', { post: post }) %>
+    <% }) %>
+    <%- partial('_partial/pager') %>
+  </section>
+</div>

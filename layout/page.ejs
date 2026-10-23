@@ -1,0 +1,16 @@
+<article class="post">
+  <header class="wrap split post-head">
+    <div></div>
+    <div>
+      <h1 class="post-title"><%= page.title %></h1>
+      <% if (page.description) { %><p class="post-sub"><%= page.description %></p><% } %>
+    </div>
+  </header>
+  <div class="rule"></div>
+  <div class="wrap split post-main">
+    <div></div>
+    <div class="post-body">
+      <div class="prose"><%- page.content %></div>
+    </div>
+  </div>
+</article>

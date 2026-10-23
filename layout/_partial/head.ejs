@@ -1,0 +1,25 @@
+<%
+  let heading = page.title;
+  if (is_tag()) heading = '#' + page.tag;
+  else if (is_archive()) heading = __('nav.archives') + (page.year ? ' ' + page.year + (page.month ? '-' + pad2(page.month) : '') : '');
+  else if (page.type === 'tags') heading = __('nav.tags');
+  else if (page.type === '404') heading = __('not_found.title');
+%>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= heading ? heading + ' / ' + config.title : config.title %></title>
+<meta name="color-scheme" content="dark light">
+<%- open_graph({ twitter_card: 'summary' }) %>
+<link rel="icon" href="<%- url_for(theme.favicon) %>" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" href="<%- url_for(theme.rss) %>" title="<%= config.title %>">
+<link rel="preload" href="<%- url_for('/fonts/geist.woff2') %>" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<%- url_for('/fonts/jetbrains-mono.woff2') %>" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="<%- url_for('/css/tty.css') %>">
+<script>
+  (function () {
+    var root = document.documentElement, saved;
+    try { saved = localStorage.getItem('tty-scheme'); } catch (e) {}
+    var scheme = saved || root.getAttribute('data-scheme-default');
+    if (scheme === 'dark' || scheme === 'light') root.setAttribute('data-scheme', scheme);
+  })();
+</script>

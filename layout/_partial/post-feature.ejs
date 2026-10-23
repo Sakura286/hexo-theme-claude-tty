@@ -1,0 +1,13 @@
+<% const firstTag = post.tags.toArray()[0]; %>
+<a class="feature" href="<%- url_for(post.path) %>">
+  <span class="feature-icon"><%- pixel_icon(post.slug, 'tile') %></span>
+  <span class="feature-body">
+    <span class="badges">
+      <span class="badge badge-solid"><%= __('list.latest') %></span>
+      <% if (firstTag) { %><span class="badge"><%= firstTag.name %></span><% } %>
+    </span>
+    <span class="feature-title"><%= post.title %></span>
+    <time class="feature-date" datetime="<%= post.date.toISOString() %>"><%= date(post.date, config.date_format) %></time>
+  </span>
+  <span class="row-meta"><%= reading_minutes(post.content) %> <%= __('list.minutes') %></span>
+</a>

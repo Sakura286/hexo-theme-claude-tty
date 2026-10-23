@@ -1,0 +1,23 @@
+<%
+  const here = is_home() ? 'home'
+    : is_archive() ? 'archives'
+    : (is_tag() || page.type === 'tags') ? 'tags'
+    : '';
+%>
+<header class="topbar wrap" id="top">
+  <a class="logo" href="<%- url_for('/') %>" aria-label="<%= config.title %>"><%- partial('_partial/logo') %></a>
+  <nav class="topnav">
+    <% (theme.menu || []).forEach(function (item) { %>
+    <a href="<%- url_for(item.path) %>"<% if (item.key) { %> data-key="<%= item.key %>"<% } %><% if (here === item.name) { %> aria-current="page"<% } %>><% if (item.key) { %><kbd>[<%= item.key.toUpperCase() %>]</kbd> <% } %><%= item.title || __('nav.' + item.name) %></a>
+    <% }) %>
+    <% if (theme.search && theme.search.enable) { %>
+    <button type="button" class="js-search" data-key="s"><kbd>[S]</kbd> <%= __('nav.search') %></button>
+    <% } %>
+  </nav>
+  <div class="topbar-end">
+    <button type="button" class="scheme-btn js-scheme" aria-label="<%= __('nav.scheme') %>" title="<%= __('nav.scheme') %>">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+    </button>
+    <a class="btn-solid" href="<%- url_for(theme.rss) %>">RSS</a>
+  </div>
+</header>

@@ -1,0 +1,48 @@
+nav:
+  home: Home
+  archives: Archives
+  tags: Tags
+  search: Search
+  scheme: Toggle color scheme
+  skip: Skip to content
+list:
+  all: All
+  latest: Latest
+  newer: Newer
+  older: Older
+  posts: posts
+  tags: tags
+  minutes: min
+post:
+  author: Author
+  tags: Tags
+  published: Published
+  updated: Updated
+  views: Views
+  toc: Tree
+  min_read: min read
+  share: Share
+  copy_link: Copy URL
+  copied: Copied
+  back_top: Back to top
+  newer: Newer
+  older: Older
+  footnotes: Footnotes
+  footnote_back: Back to content
+code:
+  copy: Copy
+  copied: Copied
+search:
+  placeholder: Search posts
+  loading: Loading…
+  empty: No results
+  failed: Failed to load index
+  hint: ↑↓ select · Enter open · Esc close
+footer:
+  site_pv: Views
+  site_uv: Visitors
+  built: Built
+  top: Top
+not_found:
+  title: Page not found
+  back: Back home

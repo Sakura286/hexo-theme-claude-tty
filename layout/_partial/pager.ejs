@@ -1,0 +1,7 @@
+<% if (page.total > 1) { %>
+<nav class="pager">
+  <% if (page.prev) { %><a href="<%- url_for(page.prev_link) %>" rel="prev">← <%= __('list.newer') %></a><% } else { %><span></span><% } %>
+  <span class="pager-count"><%= pad2(page.current) %> / <%= pad2(page.total) %></span>
+  <% if (page.next) { %><a href="<%- url_for(page.next_link) %>" rel="next"><%= __('list.older') %> →</a><% } else { %><span></span><% } %>
+</nav>
+<% } %>
